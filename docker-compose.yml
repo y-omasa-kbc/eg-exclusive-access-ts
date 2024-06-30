@@ -1,0 +1,30 @@
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api/app:/app
+    networks:
+      - test_net
+
+    
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web/webroot:/usr/share/nginx/html
+    networks:
+      - test_net  
+
+volumes:
+  test_net:
+
+networks:
+  test_net:
